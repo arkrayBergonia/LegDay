@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Intents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        guard let intent = userActivity.interaction?.intent as? INStartWorkoutIntent else {
+            print("AppDelegate: Start Workout Intent – FALSE")
+            return false
+        }
+        DataService.instance.startWorkoutIntent = intent
+        NotificationCenter.default.post(name: NSNotification.Name("workoutStartedNotification"), object: nil)
+        
+        print("AppDelegate: Start Workout Intent – TRUE")
+        print(intent)
+        return true
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

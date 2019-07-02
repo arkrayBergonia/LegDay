@@ -20,25 +20,40 @@ class WorkOutVC: UIViewController {
         self.typeLbl.isHidden = true
         self.timerLbl.isHidden = true
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSiriRequest), name: NSNotification.Name("workoutStartedNotification"), object: nil)
+        
         //needs developer program to enable at project capabilities XD
         INPreferences.requestSiriAuthorization { (status) in
             switch status {
             case .authorized:
-                print("authorized")
+                print("requestSiriAuthorization - authorized")
             case .denied:
-                print("denied")
+                print("requestSiriAuthorization - denied")
             case .notDetermined:
-                print("notDetermined")
+                print("requestSiriAuthorization - notDetermined")
             case .restricted:
-                print("restricted")
+                print("requestSiriAuthorization - restricted")
             default:
-                print("default")
+                print("requestSiriAuthorization - default")
             }
         }
         
         
     }
     
+    @objc func handleSiriRequest() {
+        guard let intent = DataService.instance.startWorkoutIntent, let goalValue = intent.goalValue, let workoutType = intent.workoutName?.spokenPhrase else {
+            timerLbl.isHidden = true
+            typeLbl.isHidden = true
+            return
+        }
+        
+        typeLbl.isHidden = false
+        timerLbl.isHidden = false
+        
+        typeLbl.text = "TYPE: \(workoutType.capitalized)"
+        timerLbl.text = "\(goalValue.convertToClockTime()) LEFT"
+    }
     
 }
 
