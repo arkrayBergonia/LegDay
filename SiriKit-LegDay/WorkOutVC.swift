@@ -8,6 +8,7 @@
 
 import UIKit
 import Intents
+import IntentsUI
 
 class WorkOutVC: UIViewController {
     
@@ -38,6 +39,9 @@ class WorkOutVC: UIViewController {
             }
         }
         
+        if #available(iOS 12.0, *) {
+            addSiriButton(to: view)
+        }
         
     }
     
@@ -55,5 +59,76 @@ class WorkOutVC: UIViewController {
         timerLbl.text = "\(goalValue.convertToClockTime()) LEFT"
     }
     
+    //MARK: SiriKit Shortcuts Implementation - addSiriButton
+    func addSiriButton(to view: UIView) {
+        if #available(iOS 12.0, *) {
+            let button = INUIAddVoiceShortcutButton(style: .whiteOutline)
+            button.shortcut = INShortcut(intent: intent )
+            button.delegate = self
+
+            button.translatesAutoresizingMaskIntoConstraints = false
+
+            view.addSubview(button)
+            view.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
+            view.centerYAnchor.constraint(equalTo: button.centerYAnchor).isActive = true
+        } else {
+            // Fallback on earlier versions
+            print("SiriKit Shortcuts Implementation NOT AVAILABLE FOR THIS IOS VERSION")
+        }
+    }
 }
 
+@available(iOS 12.0, *)
+extension WorkOutVC {
+    public var intent: TestIntent {
+        let testIntent = TestIntent()
+        testIntent.myTestParameter = "my test intent"
+        testIntent.suggestedInvocationPhrase = "Test Intent"
+        return testIntent
+    }
+}
+
+@available(iOS 12.0, *)
+extension WorkOutVC: INUIAddVoiceShortcutButtonDelegate {
+    func present(_ addVoiceShortcutViewController: INUIAddVoiceShortcutViewController, for addVoiceShortcutButton: INUIAddVoiceShortcutButton) {
+        addVoiceShortcutViewController.delegate = self
+        addVoiceShortcutViewController.modalPresentationStyle = .formSheet
+        present(addVoiceShortcutViewController, animated: true, completion: nil)
+    }
+    
+    func present(_ editVoiceShortcutViewController: INUIEditVoiceShortcutViewController, for addVoiceShortcutButton: INUIAddVoiceShortcutButton) {
+        editVoiceShortcutViewController.delegate = self
+        editVoiceShortcutViewController.modalPresentationStyle = .formSheet
+        present(editVoiceShortcutViewController, animated: true, completion: nil)
+    }
+    
+    
+}
+
+@available(iOS 12.0, *)
+extension WorkOutVC: INUIAddVoiceShortcutViewControllerDelegate {
+    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
+
+@available(iOS 12.0, *)
+extension WorkOutVC: INUIEditVoiceShortcutViewControllerDelegate {
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}

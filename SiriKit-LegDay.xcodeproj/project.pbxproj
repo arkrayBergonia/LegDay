@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0F407B22CC485E00AC3D06 /* Test.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9B0F407A22CC485E00AC3D06 /* Test.intentdefinition */; };
 		9B38181D22C9F2FE00435958 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B38181C22C9F2FE00435958 /* AppDelegate.swift */; };
 		9B38181F22C9F2FE00435958 /* WorkOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B38181E22C9F2FE00435958 /* WorkOutVC.swift */; };
 		9B38182222C9F2FF00435958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B38182022C9F2FF00435958 /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B0F407A22CC485E00AC3D06 /* Test.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Test.intentdefinition; sourceTree = "<group>"; };
 		9B38181922C9F2FE00435958 /* SiriKit-LegDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SiriKit-LegDay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B38181C22C9F2FE00435958 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B38181E22C9F2FE00435958 /* WorkOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutVC.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		9B38181022C9F2FE00435958 = {
 			isa = PBXGroup;
 			children = (
+				9B0F407A22CC485E00AC3D06 /* Test.intentdefinition */,
 				9B508A0A22CADAD500C7DBF6 /* Services */,
 				9B508A0822CADABA00C7DBF6 /* Extensions */,
 				9B38181B22C9F2FE00435958 /* SiriKit-LegDay */,
@@ -101,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				9B38182E22C9F36300435958 /* SiriKit-LegDay.entitlements */,
+				9B38182022C9F2FF00435958 /* Main.storyboard */,
 				9B38181C22C9F2FE00435958 /* AppDelegate.swift */,
 				9B38181E22C9F2FE00435958 /* WorkOutVC.swift */,
-				9B38182022C9F2FF00435958 /* Main.storyboard */,
 				9B38182322C9F34800435958 /* Assets.xcassets */,
 				9B38182522C9F34900435958 /* LaunchScreen.storyboard */,
 				9B38182822C9F34900435958 /* Info.plist */,
@@ -114,8 +117,8 @@
 		9B38183622CA12E500435958 /* IntentHandler */ = {
 			isa = PBXGroup;
 			children = (
-				9B38183722CA12E500435958 /* IntentHandler.swift */,
 				9B38183922CA12E500435958 /* Info.plist */,
+				9B38183722CA12E500435958 /* IntentHandler.swift */,
 			);
 			path = IntentHandler;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0F407B22CC485E00AC3D06 /* Test.intentdefinition in Sources */,
 				9B38181F22C9F2FE00435958 /* WorkOutVC.swift in Sources */,
 				9B508A0F22CAEC9800C7DBF6 /* IntentHandler.swift in Sources */,
 				9B508A0E22CADB7000C7DBF6 /* DataService.swift in Sources */,
